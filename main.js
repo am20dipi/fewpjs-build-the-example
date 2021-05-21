@@ -6,6 +6,38 @@ const FULL_HEART = '♥'
 
 
 
+likeGlyph = document.querySelectorAll(".like-glyph");
+activatedHeart = document.querySelectorAll(".activated-heart")
+//likeClass = document.querySelector(".like")
+
+document.getElementsByClassName("like-glyph").addEventListener("click", handleClick);
+
+function handleClick(e) {
+  const heart = e.target;
+  mimicServerCall("http://mimicServer.example.com")
+  .then(function(response) {
+    heart.innerText = activatedHeart.innerText;
+    heart.style.color = "red";
+  })
+  .catch(function(error) {
+    const modal = document.getElementById('hidden')
+    // declaring and assigning a variable "modal"
+    // querying the document to select all elements with an id of "hidden"
+    modal.className = "";
+    // resetting className of Modal to be empty string
+    modal.innerText = "Error!";
+    // changing innerText of modal to be "Error!"
+    setTimeout(() => modal.className = "hidden", 5000);
+    // setting Timeout so error does not occur immediately, changing className to "hidden"
+  });
+}
+
+
+
+
+
+
+
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
